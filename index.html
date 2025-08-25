@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colt Express: Детская Версия</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #ffd700, #ff8c00);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8B4513;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.5);
+            border: 5px solid #8B4513;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #8B4513;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #ffd700;
+            font-size: 2.2rem;
+        }
+        
+        .player-selection {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #333;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-btn.selected {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        .dice-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        .dice {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            background: #fff;
+            border: 5px solid #8B4513;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dice.rolling {
+            animation: roll 0.8s ease-out;
+        }
+        
+        @keyframes roll {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .roll-btn {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 0 #632c0a;
+        }
+        
+        .roll-btn:hover {
+            background: #632c0a;
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #632c0a;
+        }
+        
+        .roll-btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+        
+        .action-text {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 15px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .history {
+            margin-top: 25px;
+            background: #f5f5dc;
+            border-radius: 15px;
+            padding: 15px;
+            border: 3px solid #8B4513;
+        }
+        
+        .history h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #8B4513;
+        }
+        
+        #history-list {
+            list-style-type: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        #history-list li {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .history-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #333;
+        }
+        
+        .instructions {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f5f5dc;
+            border-radius: 15px;
+            border: 3px solid #8B4513;
+        }
+        
+        .instructions h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #8B4513;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 480px) {
+            .dice {
+                width: 100px;
+                height: 100px;
+                font-size: 50px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .action-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Colt Express: Детская Версия</h1>
+        
+        <div class="player-selection">
+            <p>Выбери цвет игрока:</p>
+            <div class="color-btn selected" style="background-color: #FF0000;" data-color="#FF0000"></div>
+            <div class="color-btn" style="background-color: #0000FF;" data-color="#0000FF"></div>
+            <div class="color-btn" style="background-color: #00FF00;" data-color="#00FF00"></div>
+            <div class="color-btn" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
+            <div class="color-btn" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
+        </div>
+        
+        <div class="dice-container">
+            <div class="dice">🎲</div>
+            <button class="roll-btn">Бросить кубик!</button>
+            <div class="action-text">Нажми на кнопку, чтобы бросить кубик!</div>
+        </div>
+        
+        <div class="history">
+            <h2>История бросков</h2>
+            <ul id="history-list"></ul>
+        </div>
+        
+        <div class="instructions">
+            <h2>Как играть</h2>
+            <ul>
+                <li><strong>Беги!</strong> - Переставь фигурку на соседний вагон</li>
+                <li><strong>Залезь на крышу</strong> - Поднимись на крышу вагона</li>
+                <li><strong>Спустись в вагон</strong> - Спустись внутрь вагона</li>
+                <li><strong>Возьми монетку</strong> - Если на твоём вагоне есть монетка, забери её!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dice = document.querySelector('.dice');
+            const rollButton = document.querySelector('.roll-btn');
+            const actionText = document.querySelector('.action-text');
+            const historyList = document.getElementById('history-list');
+            const colorButtons = document.querySelectorAll('.color-btn');
+            
+            let selectedColor = '#FF0000';
+            let history = [];
+            
+            // Варианты действий на кубике
+            const actions = [
+                { emoji: '🏃', text: 'Беги!', description: 'Переставь фигурку на соседний вагон' },
+                { emoji: '🏃', text: 'Беги!', description: 'Переставь фигурку на соседний вагон' },
+                { emoji: '⬆️', text: 'Залезь на крышу', description: 'Поднимись на крышу вагона' },
+                { emoji: '⬇️', text: 'Спустись в вагон', description: 'Спустись внутрь вагона' },
+                { emoji: '💰', text: 'Возьми монетку', description: 'Если на твоём вагоне есть монетка, забери её!' },
+                { emoji: '💰', text: 'Возьми монетку', description: 'Если на твоём вагоне есть монетка, забери её!' }
+            ];
+            
+            // Выбор цвета игрока
+            colorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    colorButtons.forEach(btn => btn.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedColor = this.getAttribute('data-color');
+                });
+            });
+            
+            // Бросок кубика
+            rollButton.addEventListener('click', rollDice);
+            dice.addEventListener('click', rollDice);
+            
+            function rollDice() {
+                // Анимация броска
+                dice.classList.add('rolling');
+                actionText.textContent = 'Кубик крутится...';
+                
+                // Случайный результат после задержки
+                setTimeout(() => {
+                    const randomIndex = Math.floor(Math.random() * actions.length);
+                    const result = actions[randomIndex];
+                    
+                    // Отображаем результат
+                    dice.textContent = result.emoji;
+                    actionText.innerHTML = `<span style="font-size: 1.8rem;">${result.emoji}</span> ${result.text}`;
+                    
+                    // Добавляем в историю
+                    addToHistory(result);
+                    
+                    // Завершаем анимацию
+                    dice.classList.remove('rolling');
+                }, 800);
+            }
+            
+            function addToHistory(result) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                
+                // Создаём элемент истории
+                const historyItem = document.createElement('li');
+                historyItem.innerHTML = `
+                    <div class="history-color" style="background-color: ${selectedColor};"></div>
+                    <div>
+                        <strong>${timeString}:</strong> ${result.emoji} ${result.text}
+                    </div>
+                `;
+                
+                // Добавляем в начало списка
+                historyList.insertBefore(historyItem, historyList.firstChild);
+                
+                // Сохраняем в массив истории
+                history.unshift({
+                    color: selectedColor,
+                    action: result,
+                    time: timeString
+                });
+                
+                // Ограничиваем историю 10 последними бросками
+                if (history.length > 10) {
+                    history.pop();
+                    if (historyList.lastChild) {
+                        historyList.removeChild(historyList.lastChild);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
