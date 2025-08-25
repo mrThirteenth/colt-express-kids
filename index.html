@@ -13,38 +13,294 @@
         }
         
         body {
-            background: linear-gradient(to bottom, #ffd700, #ff8c00);
+            background: linear-gradient(to bottom, #ff8c00, #ff4500, #8b0000);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8B4513;
+            color: #f5deb3;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Облака */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            z-index: -2;
+        }
+        
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+        
+        .cloud-1 {
+            top: 50px;
+            left: 10%;
+            width: 80px;
+            height: 40px;
+            animation: cloud-move 40s linear infinite;
+        }
+        
+        .cloud-1::before {
+            top: -15px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .cloud-1::after {
+            top: -10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .cloud-2 {
+            top: 100px;
+            right: 5%;
+            width: 100px;
+            height: 50px;
+            animation: cloud-move 35s linear infinite reverse;
+        }
+        
+        .cloud-2::before {
+            top: -20px;
+            left: 15px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .cloud-2::after {
+            top: -15px;
+            right: 15px;
+            width: 60px;
+            height: 60px;
+        }
+        
+        /* Анимированный фон с поездом и кактусами */
+        .train-track {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: #8B4513;
+            z-index: -1;
+        }
+        
+        .train {
+            position: absolute;
+            bottom: 110px;
+            left: -300px;
+            width: 280px;
+            height: 70px;
+            background: #a0522d;
+            border-radius: 15px;
+            animation: train-move 25s linear infinite;
+            z-index: -1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .train::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #d2691e;
+            border-radius: 50%;
+        }
+        
+        .train-window {
+            position: absolute;
+            top: 15px;
+            left: 80px;
+            width: 40px;
+            height: 30px;
+            background: #add8e6;
+            border-radius: 5px;
+        }
+        
+        .train-window:nth-child(2) {
+            left: 140px;
+        }
+        
+        /* Кактусы */
+        .cactus {
+            position: absolute;
+            bottom: 100px;
+            right: -50px;
+            width: 40px;
+            height: 80px;
+            background: #2e8b57;
+            border-radius: 10px;
+            animation: cactus-move 15s linear infinite;
+            z-index: -1;
+        }
+        
+        .cactus::before, .cactus::after {
+            content: '';
+            position: absolute;
+            background: #2e8b57;
+            border-radius: 10px;
+        }
+        
+        .cactus::before {
+            top: 20px;
+            right: -10px;
+            width: 20px;
+            height: 15px;
+        }
+        
+        .cactus::after {
+            top: 40px;
+            left: -10px;
+            width: 20px;
+            height: 15px;
+        }
+        
+        .cactus:nth-child(2) {
+            animation-delay: 5s;
+            height: 60px;
+            right: -80px;
+        }
+        
+        .cactus:nth-child(3) {
+            animation-delay: 10s;
+            height: 100px;
+            right: -120px;
+        }
+        
+        /* Камни */
+        .rock {
+            position: absolute;
+            bottom: 100px;
+            right: -50px;
+            width: 50px;
+            height: 35px;
+            background: #808080;
+            border-radius: 10px;
+            animation: cactus-move 20s linear infinite;
+            z-index: -1;
+        }
+        
+        .rock:nth-child(4) {
+            animation-delay: 7s;
+            width: 40px;
+            height: 30px;
+            right: -100px;
+        }
+        
+        .rock:nth-child(5) {
+            animation-delay: 14s;
+            width: 60px;
+            height: 40px;
+            right: -150px;
+        }
+        
+        /* Броненосцы */
+        .armadillo {
+            position: absolute;
+            bottom: 105px;
+            right: -50px;
+            width: 40px;
+            height: 20px;
+            background: #a9a9a9;
+            border-radius: 10px;
+            animation: armadillo-move 12s linear infinite;
+            z-index: 0;
+        }
+        
+        .armadillo::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 5px;
+            width: 15px;
+            height: 10px;
+            background: #a9a9a9;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .armadillo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -5px;
+            width: 10px;
+            height: 5px;
+            background: #a9a9a9;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .armadillo:nth-child(6) {
+            animation-delay: 4s;
+            right: -120px;
+        }
+        
+        .armadillo:nth-child(7) {
+            animation-delay: 8s;
+            right: -200px;
+        }
+        
+        @keyframes train-move {
+            0% { left: -300px; }
+            100% { left: 100%; }
+        }
+        
+        @keyframes cactus-move {
+            0% { right: -50px; }
+            100% { right: 100%; }
+        }
+        
+        @keyframes armadillo-move {
+            0% { right: -50px; }
+            100% { right: 100%; }
+        }
+        
+        @keyframes cloud-move {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw - 200px)); }
         }
         
         .container {
             max-width: 600px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(139, 69, 19, 0.95);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.5);
-            border: 5px solid #8B4513;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 5px solid #f5deb3;
+            margin-top: 30px;
         }
         
         h1 {
             text-align: center;
-            color: #8B4513;
+            color: #f5deb3;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 0 #ffd700;
+            text-shadow: 2px 2px 0 #8b0000;
             font-size: 2.2rem;
         }
         
         .player-selection {
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
             margin-bottom: 25px;
+        }
+        
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
         }
         
@@ -63,7 +319,25 @@
         
         .color-btn.selected {
             transform: scale(1.2);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .more-colors-btn {
+            background: #f5deb3;
+            color: #8b0000;
+            border: none;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .more-colors-btn:hover {
+            background: #8b0000;
+            color: #f5deb3;
         }
         
         .dice-container {
@@ -78,7 +352,7 @@
             height: 120px;
             border-radius: 20px;
             background: #fff;
-            border: 5px solid #8B4513;
+            border: 5px solid #f5deb3;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -102,8 +376,8 @@
         }
         
         .roll-btn {
-            background: #8B4513;
-            color: white;
+            background: #f5deb3;
+            color: #8b0000;
             border: none;
             padding: 15px 30px;
             font-size: 1.2rem;
@@ -111,13 +385,15 @@
             cursor: pointer;
             margin-top: 15px;
             transition: all 0.3s;
-            box-shadow: 0 5px 0 #632c0a;
+            box-shadow: 0 5px 0 #d2b48c;
+            font-weight: bold;
         }
         
         .roll-btn:hover {
-            background: #632c0a;
+            background: #8b0000;
+            color: #f5deb3;
             transform: translateY(3px);
-            box-shadow: 0 2px 0 #632c0a;
+            box-shadow: 0 2px 0 #d2b48c;
         }
         
         .roll-btn:active {
@@ -134,20 +410,21 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            color: #f5deb3;
         }
         
         .history {
             margin-top: 25px;
-            background: #f5f5dc;
+            background: rgba(245, 222, 179, 0.2);
             border-radius: 15px;
             padding: 15px;
-            border: 3px solid #8B4513;
+            border: 3px solid #f5deb3;
         }
         
         .history h2 {
             text-align: center;
             margin-bottom: 15px;
-            color: #8B4513;
+            color: #f5deb3;
         }
         
         #history-list {
@@ -162,6 +439,7 @@
             border-radius: 10px;
             display: flex;
             align-items: center;
+            background: rgba(245, 222, 179, 0.1);
         }
         
         .history-color {
@@ -169,21 +447,21 @@
             height: 20px;
             border-radius: 50%;
             margin-right: 10px;
-            border: 2px solid #333;
+            border: 2px solid #f5deb3;
         }
         
         .instructions {
             margin-top: 25px;
             padding: 15px;
-            background: #f5f5dc;
+            background: rgba(245, 222, 179, 0.2);
             border-radius: 15px;
-            border: 3px solid #8B4513;
+            border: 3px solid #f5deb3;
         }
         
         .instructions h2 {
             text-align: center;
             margin-bottom: 15px;
-            color: #8B4513;
+            color: #f5deb3;
         }
         
         .instructions ul {
@@ -192,6 +470,24 @@
         
         .instructions li {
             margin-bottom: 8px;
+        }
+        
+        .sound-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(139, 69, 19, 0.8);
+            color: #f5deb3;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
         
         @media (max-width: 480px) {
@@ -208,20 +504,59 @@
             .action-text {
                 font-size: 1.2rem;
             }
+            
+            .sound-control {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Анимированный фон -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    
+    <div class="train-track"></div>
+    <div class="train">
+        <div class="train-window"></div>
+        <div class="train-window"></div>
+    </div>
+    <div class="cactus"></div>
+    <div class="cactus"></div>
+    <div class="cactus"></div>
+    <div class="rock"></div>
+    <div class="rock"></div>
+    <div class="armadillo"></div>
+    <div class="armadillo"></div>
+    <div class="armadillo"></div>
+    
+    <!-- Кнопка управления звуком -->
+    <button class="sound-control">🔊</button>
+    
     <div class="container">
         <h1>Colt Express: Детская Версия</h1>
         
         <div class="player-selection">
             <p>Выбери цвет игрока:</p>
-            <div class="color-btn selected" style="background-color: #FF0000;" data-color="#FF0000"></div>
-            <div class="color-btn" style="background-color: #0000FF;" data-color="#0000FF"></div>
-            <div class="color-btn" style="background-color: #00FF00;" data-color="#00FF00"></div>
-            <div class="color-btn" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
-            <div class="color-btn" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
+            <div class="color-palette">
+                <div class="color-btn selected" style="background-color: #FF0000;" data-color="#FF0000"></div>
+                <div class="color-btn" style="background-color: #0000FF;" data-color="#0000FF"></div>
+                <div class="color-btn" style="background-color: #00FF00;" data-color="#00FF00"></div>
+                <div class="color-btn" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
+                <div class="color-btn" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
+            </div>
+            <button class="more-colors-btn">Другие цвета</button>
+            <div class="color-palette additional-colors" style="display: none; margin-top: 10px;">
+                <div class="color-btn" style="background-color: #FFA500;" data-color="#FFA500"></div>
+                <div class="color-btn" style="background-color: #800080;" data-color="#800080"></div>
+                <div class="color-btn" style="background-color: #00FFFF;" data-color="#00FFFF"></div>
+                <div class="color-btn" style="background-color: #FFC0CB;" data-color="#FFC0CB"></div>
+                <div class="color-btn" style="background-color: #A52A2A;" data-color="#A52A2A"></div>
+            </div>
         </div>
         
         <div class="dice-container">
@@ -253,19 +588,37 @@
             const actionText = document.querySelector('.action-text');
             const historyList = document.getElementById('history-list');
             const colorButtons = document.querySelectorAll('.color-btn');
+            const moreColorsBtn = document.querySelector('.more-colors-btn');
+            const additionalColors = document.querySelector('.additional-colors');
+            const soundControl = document.querySelector('.sound-control');
             
             let selectedColor = '#FF0000';
             let history = [];
+            let soundEnabled = true;
             
             // Варианты действий на кубике
             const actions = [
-                { emoji: '🏃', text: 'Беги!', description: 'Переставь фигурку на соседний вагон' },
-                { emoji: '🏃', text: 'Беги!', description: 'Переставь фигурку на соседний вагон' },
-                { emoji: '⬆️', text: 'Залезь на крышу', description: 'Поднимись на крышу вагона' },
-                { emoji: '⬇️', text: 'Спустись в вагон', description: 'Спустись внутрь вагона' },
-                { emoji: '💰', text: 'Возьми монетку', description: 'Если на твоём вагоне есть монетка, забери её!' },
-                { emoji: '💰', text: 'Возьми монетку', description: 'Если на твоём вагоне есть монетка, забери её!' }
+                { emoji: '🏃', text: 'Беги!', description: 'Переставь фигурку на соседний вагон', sound: 'move' },
+                { emoji: '🏃', text: 'Беги!', description: 'Переставь фигурку на соседний вагон', sound: 'move' },
+                { emoji: '⬆️', text: 'Залезь на крышу', description: 'Поднимись на крышу вагона', sound: 'climb' },
+                { emoji: '⬇️', text: 'Спустись в вагон', description: 'Спустись внутрь вагона', sound: 'climb' },
+                { emoji: '💰', text: 'Возьми монетку', description: 'Если на твоём вагоне есть монетка, забери её!', sound: 'coin' },
+                { emoji: '💰', text: 'Возьми монетку', description: 'Если на твоём вагоне есть монетка, забери её!', sound: 'coin' }
             ];
+            
+            // Звуковые эффекты - будут загружаться из папки files
+            const sounds = {
+                roll: new Audio('files/roll.wav'),
+                move: new Audio('files/move.wav'),
+                climb: new Audio('files/climb.wav'),
+                coin: new Audio('files/coin.wav')
+            };
+            
+            // Настройка громкости звуков
+            Object.values(sounds).forEach(sound => {
+                sound.volume = 0.6;
+                sound.preload = 'auto';
+            });
             
             // Выбор цвета игрока
             colorButtons.forEach(button => {
@@ -274,6 +627,29 @@
                     this.classList.add('selected');
                     selectedColor = this.getAttribute('data-color');
                 });
+            });
+            
+            // Кнопка дополнительных цветов
+            moreColorsBtn.addEventListener('click', function() {
+                if (additionalColors.style.display === 'none') {
+                    additionalColors.style.display = 'flex';
+                    moreColorsBtn.textContent = 'Меньше цветов';
+                } else {
+                    additionalColors.style.display = 'none';
+                    moreColorsBtn.textContent = 'Другие цвета';
+                }
+            });
+            
+            // Управление звуком
+            soundControl.addEventListener('click', function() {
+                soundEnabled = !soundEnabled;
+                if (soundEnabled) {
+                    soundControl.textContent = '🔊';
+                    soundControl.style.background = 'rgba(139, 69, 19, 0.8)';
+                } else {
+                    soundControl.textContent = '🔇';
+                    soundControl.style.background = 'rgba(150, 150, 150, 0.8)';
+                }
             });
             
             // Бросок кубика
@@ -285,6 +661,21 @@
                 dice.classList.add('rolling');
                 actionText.textContent = 'Кубик крутится...';
                 
+                // Звук броска
+                if (soundEnabled) {
+                    // Проверяем, доступен ли звук
+                    if (sounds.roll && typeof sounds.roll.play === 'function') {
+                        try {
+                            sounds.roll.currentTime = 0;
+                            sounds.roll.play().catch(e => {
+                                console.log("Не удалось воспроизвести звук: ", e);
+                            });
+                        } catch (e) {
+                            console.log("Ошибка воспроизведения звука: ", e);
+                        }
+                    }
+                }
+                
                 // Случайный результат после задержки
                 setTimeout(() => {
                     const randomIndex = Math.floor(Math.random() * actions.length);
@@ -293,6 +684,18 @@
                     // Отображаем результат
                     dice.textContent = result.emoji;
                     actionText.innerHTML = `<span style="font-size: 1.8rem;">${result.emoji}</span> ${result.text}`;
+                    
+                    // Воспроизводим звук результата
+                    if (soundEnabled && sounds[result.sound]) {
+                        try {
+                            sounds[result.sound].currentTime = 0;
+                            sounds[result.sound].play().catch(e => {
+                                console.log("Не удалось воспроизвести звук: ", e);
+                            });
+                        } catch (e) {
+                            console.log("Ошибка воспроизведения звука: ", e);
+                        }
+                    }
                     
                     // Добавляем в историю
                     addToHistory(result);
